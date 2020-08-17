@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Pashko_ZipLookup
+ *
+ * @category ZipLookup
+ * @package Pashko_ZipLookup
+ * @author Ostap Pashko <ostap.paashko@gmail.com>
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="pashko_ziplookup" resource="default" engine="innodb" comment="Zip Lookup Table">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="varchar" name="zip" nullable="false" length="255" comment="Zip Code"/>
+        <column xsi:type="varchar" name="city" nullable="false" length="255" comment="City"/>
+        <column xsi:type="int" name="region_id" unsigned="true" nullable="true" identity="false"
+                comment="Region/State/Province"/>
+        <column xsi:type="varchar" name="region" nullable="false" length="255" comment="Region/State/Province"/>
+        <column xsi:type="varchar" name="country_id" nullable="false" length="255" comment="Country"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="PASHKO_ZIPLOOKUP_ZIP">
+            <column name="zip"/>
+        </constraint>
+    </table>
+
+</schema>

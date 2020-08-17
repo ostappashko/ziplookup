@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Pashko_ZipLookup
+ *
+ * @category ZipLookup
+ * @package Pashko_ZipLookup
+ * @author Ostap Pashko <ostap.paashko@gmail.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
+        <plugin name="layout-processor-add-zip-validation" type="Pashko\ZipLookup\Plugin\Block\Checkout\LayoutProcessorPlugin" sortOrder="10"/>
+    </type>
+</config>

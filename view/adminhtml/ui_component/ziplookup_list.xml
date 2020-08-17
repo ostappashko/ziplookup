@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Pashko_ZipLookup
+ *
+ * @category ZipLookup
+ * @package Pashko_ZipLookup
+ * @author Ostap Pashko <ostap.paashko@gmail.com>
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">ziplookup_list.ziplookup_list_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/edit"/>
+                <class>primary</class>
+                <label translate="true">Add New Zip</label>
+            </button>
+        </buttons>
+        <spinner>ziplookup_columns</spinner>
+        <deps>
+            <dep>ziplookup_list.ziplookup_list_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="ziplookup_list_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Pashko_ZipLookup::manage</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="ziplookup_list_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <columnsControls name="columns_controls"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters"/>
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete selected zip codes?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="ziplookup/index/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="ziplookup_columns">
+        <selectionsColumn name="ids" sortOrder="10">
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="entity_id" sortOrder="20">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="zip" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Zip Code</label>
+            </settings>
+        </column>
+        <column name="city" sortOrder="40">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">City</label>
+            </settings>
+        </column>
+        <column name="region" class="Pashko\ZipLookup\Ui\Component\Listing\Column\Region" sortOrder="50">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">State</label>
+            </settings>
+        </column>
+        <column name="country_id" sortOrder="60">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Country</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Pashko\ZipLookup\Ui\Component\Listing\Column\Actions" sortOrder="70">
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

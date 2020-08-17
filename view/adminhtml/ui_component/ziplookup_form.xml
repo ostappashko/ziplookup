@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Pashko_ZipLookup
+ *
+ * @category ZipLookup
+ * @package Pashko_ZipLookup
+ * @author Ostap Pashko <ostap.paashko@gmail.com>
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">ziplookup_form.ziplookup_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Zip Information</item>
+        <item name="reverseMetadataMerge" xsi:type="boolean">true</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="Pashko\ZipLookup\Block\Adminhtml\Edit\SaveButton"/>
+            <button name="back" class="Pashko\ZipLookup\Block\Adminhtml\Edit\BackButton"/>
+        </buttons>
+        <layout>
+            <navContainerName>left</navContainerName>
+            <type>tabs</type>
+        </layout>
+        <deps>
+            <dep>ziplookup_form.ziplookup_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="ziplookup_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="ziplookup/index/save"/>
+        </settings>
+        <dataProvider class="Pashko\ZipLookup\Ui\Zip\DataProvider" name="ziplookup_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="zip">
+        <settings>
+            <label translate="true">Zip Information</label>
+        </settings>
+        <field name="entity_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">zip</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+            </settings>
+        </field>
+
+        <field name="country_id" formElement="select" sortOrder="10">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Country</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Directory\Model\Config\Source\Country"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="region_id"
+               component="Magento_InventoryAdminUi/js/form/element/region"
+               formElement="select" sortOrder="20">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Region/State/Province</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\InventoryAdminUi\Model\OptionSource\RegionSource"/>
+                        <filterBy>
+                            <field>country_id</field>
+                            <target>${ $.provider }:${ $.parentScope }.country_id</target>
+                        </filterBy>
+                        <customEntry>region</customEntry>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="region" formElement="input" sortOrder="30">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Region/State/Province</label>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="city" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">City</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">zip</item>
+                    <item name="dataScope" xsi:type="string">city</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+            </settings>
+        </field>
+        <field name="zip" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Zip</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">zip</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+            </settings>
+        </field>
+    </fieldset>
+</form>

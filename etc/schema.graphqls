@@ -1,0 +1,17 @@
+type Query {
+    ziplookup(
+        zip: String @doc(description: "Zip Code")
+    ): ZipLookup
+    @resolver(class:"Pashko\\ZipLookup\\Model\\Resolver\\ZipLookup")
+    @doc(description:
+        "Returns city, state and country if such zipcode exists")
+    @cache(cacheable: true)
+}
+type ZipLookup @doc(description: "Defines the zip code entity and returns country, state and city") {
+    entity_id: Int
+    country_id: String
+    region: String
+    region_id: String
+    city: String
+    zip: String
+}

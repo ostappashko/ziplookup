@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Pashko_ZipLookup
+ *
+ * @category ZipLookup
+ * @package Pashko_ZipLookup
+ * @author Ostap Pashko <ostap.paashko@gmail.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Pashko_ZipLookup::list" title="Zip Lookup List" translate="title" module="Pashko_ZipLookup" sortOrder="10" action="ziplookup/index/" resource="Pashko_ZipLookup::manage"/>
+    </menu>
+</config>

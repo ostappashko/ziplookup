@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Pashko_ZipLookup
+ *
+ * @category ZipLookup
+ * @package Pashko_ZipLookup
+ * @author Ostap Pashko <ostap.paashko@gmail.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="ziplookup" frontName="ziplookup">
+            <module name="Pashko_ZipLookup" before="Magento_Backend" />
+        </route>
+    </router>
+</config>

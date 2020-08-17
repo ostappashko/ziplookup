@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Pashko_ZipLookup
+ *
+ * @category ZipLookup
+ * @package Pashko_ZipLookup
+ * @author Ostap Pashko <ostap.paashko@gmail.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="ziplookup_list_data_source" xsi:type="string">Pashko\ZipLookup\Model\ResourceModel\Zip\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Pashko\ZipLookup\Model\ResourceModel\Zip\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">pashko_ziplookup</argument>
+            <argument name="resourceModel" xsi:type="string">Pashko\ZipLookup\Model\ResourceModel\Zip</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\ImportExport\Model\Import\SampleFileProvider">
+        <arguments>
+            <argument name="samples" xsi:type="array">
+                <item name="pashko_ziplookup" xsi:type="string">Pashko_ZipLookup</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <preference for="Pashko\ZipLookup\Api\ZipRepositoryInterface" type="Pashko\ZipLookup\Model\ZipRepository"/>
+    <preference for="Pashko\ZipLookup\Api\Data\ZipInterface" type="Pashko\ZipLookup\Model\Zip"/>
+</config>
